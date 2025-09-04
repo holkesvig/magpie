@@ -59,7 +59,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 interface AirtableRecord<T = any> { id: string; createdTime: string; fields: T; }
 interface AirtableListResponse<T = any> { records: AirtableRecord<T>[]; offset?: string; }
 interface PlushieDay { id?: string; dateKey: string; date?: string; count: number; notes?: string | null; createdAt?: string; updatedAt?: string; }
-const AIRTABLE_API = `https://api.airtable.com/v0/${process.env.AIRTABLE_BASE_ID}/${encodeURIComponent(process.env.AIRTABLE_TABLE_NAME ?? '')}`;
+const AIRTABLE_API = `https://api.airtable.com/v0/${process.env.AIRTABLE_BASE_ID}/${process.env.AIRTABLE_TABLE_NAME ?? ''}`;
 const AUTH_HEADER = { Authorization: `Bearer ${process.env.AIRTABLE_API_KEY}` };
 function cors(res: VercelResponse){ res.setHeader('Access-Control-Allow-Origin', process.env.ALLOWED_ORIGIN ?? '*'); res.setHeader('Access-Control-Allow-Headers','Content-Type,x-edit-key');}
 function toPlushieDay(rec: AirtableRecord<any>): PlushieDay { return { id: rec.id, dateKey: rec.fields.dateKey, date: rec.fields.date, count: Number(rec.fields.count ?? 0), notes: rec.fields.notes ?? null, createdAt: rec.fields.createdAt ?? rec.createdTime, updatedAt: rec.fields.updatedAt ?? rec.fields['Last Modified'] ?? undefined }; }
