@@ -15,13 +15,13 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   const { from, to } = req.query as { from?: string; to?: string };
 
   // Build filterByFormula
-  // let filterByFormula = '';
-  // if (from && to) filterByFormula = `AND({dateKey} >= "${from}", {dateKey} <= "${to}")`;
-  // else if (from) filterByFormula = `({dateKey} >= "${from}")`;
+  let filterByFormula = '';
+  if (from && to) filterByFormula = `AND({dateKey} >= "${from}", {dateKey} <= "${to}")`;
+  else if (from) filterByFormula = `({dateKey} >= "${from}")`;
   // else: no filter (returns all)
 
   const params = new URLSearchParams();
-  // if (filterByFormula) params.set('filterByFormula', filterByFormula);
+  if (filterByFormula) params.set('filterByFormula', filterByFormula);
   params.set('pageSize', '100');
   params.set('sort[0][field]', 'dateKey');
   params.set('sort[0][direction]', 'asc');
@@ -40,9 +40,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         return res.status(502).json({ error: 'airtable_error', detail: text });
       }
 
-      const json = (await resp.json()) as AirtableListResponse<any>;
-      for (const rec of json.records) all.push(toPlushieDay(rec));
-      offset = json.offset;
+      // const json = (await resp.json()) as AirtableListResponse<any>;
+      // for (const rec of json.records) all.push(toPlushieDay(rec));
+      // offset = json.offset;
     } while (offset);
 
     return res.status(200).json({ records: all });
