@@ -1,6 +1,6 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import type { AirtableListResponse, PlushieDay } from '@api/plushies/types';
-import { cors, AUTH_HEADER, AIRTABLE_API, toPlushieDay } from '@api/plushies/types';
+// import type { AirtableListResponse, PlushieDay } from 'api/plushies/types';
+// import { cors, AUTH_HEADER, AIRTABLE_API, toPlushieDay } from 'api/plushies/types';
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method === 'OPTIONS') {
@@ -56,10 +56,10 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
  * If you prefer, move these helpers into /api/_airtable.ts and import them instead.
  */
 // ---- inline helpers (duplicate minimal set to keep file standalone) ----
-// interface AirtableRecord<T = any> { id: string; createdTime: string; fields: T; }
-// interface AirtableListResponse<T = any> { records: AirtableRecord<T>[]; offset?: string; }
-// interface PlushieDay { id?: string; dateKey: string; date?: string; count: number; notes?: string | null; createdAt?: string; updatedAt?: string; }
-// const AIRTABLE_API = `https://api.airtable.com/v0/${process.env.AIRTABLE_BASE_ID}/${encodeURIComponent(process.env.AIRTABLE_TABLE_NAME ?? '')}`;
-// const AUTH_HEADER = { Authorization: `Bearer ${process.env.AIRTABLE_API_KEY}` };
-// function cors(res: VercelResponse){ res.setHeader('Access-Control-Allow-Origin', process.env.ALLOWED_ORIGIN ?? '*'); res.setHeader('Access-Control-Allow-Headers','Content-Type,x-edit-key');}
-// function toPlushieDay(rec: AirtableRecord<any>): PlushieDay { return { id: rec.id, dateKey: rec.fields.dateKey, date: rec.fields.date, count: Number(rec.fields.count ?? 0), notes: rec.fields.notes ?? null, createdAt: rec.fields.createdAt ?? rec.createdTime, updatedAt: rec.fields.updatedAt ?? rec.fields['Last Modified'] ?? undefined }; }
+interface AirtableRecord<T = any> { id: string; createdTime: string; fields: T; }
+interface AirtableListResponse<T = any> { records: AirtableRecord<T>[]; offset?: string; }
+interface PlushieDay { id?: string; dateKey: string; date?: string; count: number; notes?: string | null; createdAt?: string; updatedAt?: string; }
+const AIRTABLE_API = `https://api.airtable.com/v0/${process.env.AIRTABLE_BASE_ID}/${encodeURIComponent(process.env.AIRTABLE_TABLE_NAME ?? '')}`;
+const AUTH_HEADER = { Authorization: `Bearer ${process.env.AIRTABLE_API_KEY}` };
+function cors(res: VercelResponse){ res.setHeader('Access-Control-Allow-Origin', process.env.ALLOWED_ORIGIN ?? '*'); res.setHeader('Access-Control-Allow-Headers','Content-Type,x-edit-key');}
+function toPlushieDay(rec: AirtableRecord<any>): PlushieDay { return { id: rec.id, dateKey: rec.fields.dateKey, date: rec.fields.date, count: Number(rec.fields.count ?? 0), notes: rec.fields.notes ?? null, createdAt: rec.fields.createdAt ?? rec.createdTime, updatedAt: rec.fields.updatedAt ?? rec.fields['Last Modified'] ?? undefined }; }
