@@ -20,35 +20,35 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   else if (from) filterByFormula = `({dateKey} >= "${from}")`;
   // else: no filter (returns all)
 
-  // const params = new URLSearchParams();
-  // if (filterByFormula) params.set('filterByFormula', filterByFormula);
-  // params.set('pageSize', '100');
-  // params.set('sort[0][field]', 'dateKey');
-  // params.set('sort[0][direction]', 'asc');
+  const params = new URLSearchParams();
+  if (filterByFormula) params.set('filterByFormula', filterByFormula);
+  params.set('pageSize', '100');
+  params.set('sort[0][field]', 'dateKey');
+  params.set('sort[0][direction]', 'asc');
 
-  // try {
-  //   const all: PlushieDay[] = [];
-  //   let offset: string | undefined = undefined;
+  try {
+    const all: PlushieDay[] = [];
+    let offset: string | undefined = undefined;
 
-  //   do {
-  //     const url = new URL(AIRTABLE_API + (params.toString() ? `?${params.toString()}` : ''));
-  //     if (offset) url.searchParams.set('offset', offset);
+    do {
+      const url = new URL(AIRTABLE_API + (params.toString() ? `?${params.toString()}` : ''));
+      if (offset) url.searchParams.set('offset', offset);
 
-  //     const resp = await fetch(url.toString(), { headers: AUTH_HEADER });
-  //     if (!resp.ok) {
-  //       const text = await resp.text();
-  //       return res.status(502).json({ error: 'airtable_error', detail: text });
-  //     }
+      const resp = await fetch(url.toString(), { headers: AUTH_HEADER });
+      if (!resp.ok) {
+        const text = await resp.text();
+        return res.status(502).json({ error: 'airtable_error', detail: text });
+      }
 
-  //     const json = (await resp.json()) as AirtableListResponse<any>;
-  //     for (const rec of json.records) all.push(toPlushieDay(rec));
-  //     offset = json.offset;
-  //   } while (offset);
+      const json = (await resp.json()) as AirtableListResponse<any>;
+      for (const rec of json.records) all.push(toPlushieDay(rec));
+      offset = json.offset;
+    } while (offset);
 
-  //   return res.status(200).json({ records: all });
-  // } catch (err: any) {
-  //   return res.status(500).json({ error: 'server_error', detail: err?.message ?? String(err) });
-  // }
+    return res.status(200).json({ records: all });
+  } catch (err: any) {
+    return res.status(500).json({ error: 'server_error', detail: err?.message ?? String(err) });
+  }
 }
 
 /**
