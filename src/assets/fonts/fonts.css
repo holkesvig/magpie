@@ -1,0 +1,48 @@
+@font-face {
+  font-family: "Lexend";
+  src: url("../fonts/Lexend/Lexend-VariableFont_wght.ttf") format("truetype");
+  font-style: normal;
+  font-weight: variable;
+}
+
+@font-face {
+  font-family: "Monsterrat";
+  src: url("../fonts/Monsterrat/Montserrat-VariableFont_wght.ttf") format("truetype");
+  font-style: normal;
+  font-weight: variable;
+}
+
+@font-face {
+  font-family: "Monsterrat Italic";
+  src: url("../fonts/Monsterrat/Montserrat-Italic-VariableFont_wght.ttf") format("truetype");
+  font-style: italic;
+  font-weight: variable;
+}
+
+@font-face {
+  font-family: "Lora";
+  src: url("../fonts/Lora/Lora-VariableFont_wght.ttf") format("truetype");
+  font-style: normal;
+  font-weight: variable;
+}
+
+@font-face {
+  font-family: "Lora Italic";
+  src: url("../fonts/Lora/Lora-Italic-VariableFont_wght.ttf") format("truetype");
+  font-style: italic;
+  font-weight: variable;
+}
+
+@font-face {
+  font-family: "Dm Serif Display";
+  src: url("../fonts/DMSerifDisplay/DMSerifDisplay-Regular.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Lora Italic";
+  src: url("../fonts/DMSerifDisplay/DMSerifDisplay-Italic.ttf") format("truetype");
+  font-style: italic;
+  font-weight: 400;
+}

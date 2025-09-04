@@ -1,0 +1,40 @@
+.nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1rem;
+  box-sizing: border-box;
+  background-color: transparent;
+  color: black;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 60px;
+  z-index: 1000;
+
+  .menuButton {
+
+    @media screen and (min-width: 768px) {
+      display: none;
+    }
+  }
+
+  .logo {
+    width: 20%;
+  }
+
+  .links {
+    display: none;
+
+    @media screen and (min-width: 768px) {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-end;
+      align-items: flex-end;
+      width: 80%;
+      gap: 20px;
+    }
+  }
+}

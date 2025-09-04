@@ -1,0 +1,68 @@
+// brand colors
+$color-primitive-saffron: #8B2402;
+$color-primitive-orange: #B75D0E;
+$color-primitive-sunflower: #F5C948;
+$color-primitive-olive: #5C6B2B;
+$color-primitive-dark-olive: #283618;
+$color-primitive-cornsilk: #FEFAE0;
+
+
+// neutral colors
+$color-primitive-neutral-black: #000;
+$color-primitive-neutral-900: #131312;
+$color-primitive-neutral-800: #242424;
+$color-primitive-neutral-700: #333333;
+$color-primitive-neutral-600: #4F4F4F;
+$color-primitive-neutral-500: #666666;
+$color-primitive-neutral-400: #808080;
+$color-primitive-neutral-300: #999999;
+$color-primitive-neutral-200: #B3B3B3;
+$color-primitive-neutral-100: #CCCCCC;
+$color-primitive-neutral-subtle:#F2F3F8;
+$color-primitive-neutral-not-white: #F9F9F9;
+$color-primitive-neutral-white: #fff; // high contrast text on dark mode
+
+// Greenish Neutrals
+$color-primitive-neutreen-900:#0F1003;
+$color-primitive-greyple-800: #5F5F98;
+$color-primitive-greyple-700: #6E6EA4;
+$color-primitive-greyple-600: #8282B8;
+$color-primitive-greyple-500: #9E9CCD; // minimum viable on dark mode
+$color-primitive-greyple-400: #AAAAD3;
+$color-primitive-greyple-300: #C3C3E7;
+$color-primitive-greyple-200: #d1d1ec; // most dark mode text
+$color-primitive-greyple-100: #e2e2f4;
+
+// bright rainbow colors
+$color-primitive-rainbow-bright-red: #FF3D60;
+$color-primitive-rainbow-bright-orange: #FF7D28;
+$color-primitive-rainbow-bright-yellow: #FABD40;
+$color-primitive-rainbow-bright-green: #2DDD6A;
+$color-primitive-rainbow-bright-blue: #64D1FB;
+$color-primitive-rainbow-bright-indigo: #7C96FF;
+$color-primitive-rainbow-bright-violet: #D63BFC;
+
+// mid-tone rainbow colors
+$color-primitive-rainbow-medium-red: #B50932;
+$color-primitive-rainbow-medium-orange: #FF7D28;
+$color-primitive-rainbow-medium-yellow: #FABD40;
+$color-primitive-rainbow-medium-green: #017E42;
+$color-primitive-rainbow-medium-blue: #335AE2;
+$color-primitive-rainbow-medium-indigo: #5856F2;
+$color-primitive-rainbow-medium-violet: #9F1DDD;
+
+// status colors for light mode
+$color-primitive-status-lm-success: #017E42;
+$color-primitive-status-lm-success-hover: #0DA867;
+$color-primitive-status-lm-warning: #FABD40;
+$color-primitive-status-lm-warning-text: #854103;
+$color-primitive-status-lm-danger: #B50932;
+$color-primitive-status-lm-danger-hover: #E4294B;
+
+// status colors for dark mode
+$color-primitive-status-dm-success: #2DDD6A;
+$color-primitive-status-dm-success-hover: #0DA867;
+$color-primitive-status-dm-warning: #FABD40;
+$color-primitive-status-dm-warning-hover: #F89538;
+$color-primitive-status-dm-danger: #FF4F6F;
+$color-primitive-status-dm-danger-hover: #ce1e3e;
