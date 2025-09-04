@@ -35,6 +35,6 @@
     },
     "incremental": true
   },
-  "include": ["src"],
+  "include": ["src", "api"],
   "exclude": ["node_modules", "dist"],
 }
