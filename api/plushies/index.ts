@@ -4,12 +4,12 @@ import type { VercelRequest, VercelResponse } from '@vercel/node';
 /** ---------- config & tiny helpers (inline to avoid import path issues) ---------- */
 
 const AIRTABLE_BASE_ID = process.env.AIRTABLE_BASE_ID ?? "";
-const AIRTABLE_TABLE_NAME = process.env.AIRTABLE_TABLE_NAME ?? ""; // table NAME or tblXXXXXXXX id
+const AIRTABLE_TABLE_ID = process.env.AIRTABLE_TABLE_ID ?? ""; // table NAME or tblXXXXXXXX id
 const AIRTABLE_API_KEY = process.env.AIRTABLE_API_KEY ?? "";
 const ALLOWED_ORIGIN = process.env.ALLOWED_ORIGIN ?? "*";
 
-const AIRTABLE_API = AIRTABLE_BASE_ID && AIRTABLE_TABLE_NAME
-  ? `https://api.airtable.com/v0/${AIRTABLE_BASE_ID}/${encodeURIComponent(AIRTABLE_TABLE_NAME)}`
+const AIRTABLE_API = AIRTABLE_BASE_ID && AIRTABLE_TABLE_ID
+  ? `https://api.airtable.com/v0/${AIRTABLE_BASE_ID}/${encodeURIComponent(AIRTABLE_TABLE_ID)}`
   : "" as const;
 
 type AirtableRecord<T = any> = { id: string; createdTime: string; fields: T };
@@ -65,12 +65,12 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   cors(res);
 
   // Env guardrails (404 comes from missing function; we want explicit 500s if envs are missing)
-  if (!AIRTABLE_BASE_ID || !AIRTABLE_TABLE_NAME || !AIRTABLE_API_KEY) {
+  if (!AIRTABLE_BASE_ID || !AIRTABLE_TABLE_ID || !AIRTABLE_API_KEY) {
     return res.status(500).json({
       error: "missing_env",
       detail: {
         AIRTABLE_BASE_ID: !!AIRTABLE_BASE_ID,
-        AIRTABLE_TABLE_NAME: !!AIRTABLE_TABLE_NAME,
+        AIRTABLE_TABLE_ID: !!AIRTABLE_TABLE_ID,
         AIRTABLE_API_KEY: !!AIRTABLE_API_KEY,
       },
     });
