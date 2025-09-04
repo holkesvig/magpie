@@ -9,7 +9,7 @@ const AIRTABLE_API_KEY = process.env.AIRTABLE_API_KEY ?? "";
 const ALLOWED_ORIGIN = process.env.ALLOWED_ORIGIN ?? "*";
 
 const AIRTABLE_API = AIRTABLE_BASE_ID && AIRTABLE_TABLE_ID
-  ? `https://api.airtable.com/v0/${AIRTABLE_BASE_ID}/${encodeURIComponent(AIRTABLE_TABLE_ID)}`
+  ? `https://api.airtable.com/v0/${AIRTABLE_BASE_ID}/${encodeURIComponent(AIRTABLE_TABLE_ID) || 'plushies'}`
   : "" as const;
 
 type AirtableRecord<T = any> = { id: string; createdTime: string; fields: T };
