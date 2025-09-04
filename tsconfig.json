@@ -31,6 +31,7 @@
       "@styles/*": ["styles/*"],
       "@utils/*": ["utils/*"],
       "@constants/*": ["constants/*"],
+      "@api/*": ["api/*"],
     },
     "incremental": true
   },
