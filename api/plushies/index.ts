@@ -1,24 +1,24 @@
-// import type { VercelRequest, VercelResponse } from '@vercel/node';
+import type { VercelRequest, VercelResponse } from '@vercel/node';
 // // import type { AirtableListResponse, PlushieDay } from '../types';
 // // import { cors, AUTH_HEADER, AIRTABLE_API, toPlushieDay } from '../types';
 
-// export default async function handler(req: VercelRequest, res: VercelResponse) {
-//   if (req.method === 'OPTIONS') {
-//     cors(res);
-//     res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS');
-//     return res.status(204).end();
-//   }
-//   if (req.method !== 'GET') return res.status(405).json({ error: 'method_not_allowed' });
+export default async function handler(req: VercelRequest, res: VercelResponse) {
+  if (req.method === 'OPTIONS') {
+    cors(res);
+    res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS');
+    return res.status(204).end();
+  }
+  if (req.method !== 'GET') return res.status(405).json({ error: 'method_not_allowed' });
 
-//   cors(res);
+  cors(res);
 
-//   const { from, to } = req.query as { from?: string; to?: string };
+  const { from, to } = req.query as { from?: string; to?: string };
 
-//   // Build filterByFormula
-//   let filterByFormula = '';
-//   if (from && to) filterByFormula = `AND({dateKey} >= "${from}", {dateKey} <= "${to}")`;
-//   else if (from) filterByFormula = `({dateKey} >= "${from}")`;
-//   // else: no filter (returns all)
+  // Build filterByFormula
+  let filterByFormula = '';
+  if (from && to) filterByFormula = `AND({dateKey} >= "${from}", {dateKey} <= "${to}")`;
+  else if (from) filterByFormula = `({dateKey} >= "${from}")`;
+  // else: no filter (returns all)
 
 //   const params = new URLSearchParams();
 //   if (filterByFormula) params.set('filterByFormula', filterByFormula);
@@ -61,11 +61,5 @@
 // interface PlushieDay { id?: string; dateKey: string; date?: string; count: number; notes?: string | null; createdAt?: string; updatedAt?: string; }
 // const AIRTABLE_API = `https://api.airtable.com/v0/${process.env.AIRTABLE_BASE_ID}/${encodeURIComponent(process.env.AIRTABLE_TABLE_NAME ?? '')}`;
 // const AUTH_HEADER = { Authorization: `Bearer ${process.env.AIRTABLE_API_KEY}` };
-// function cors(res: VercelResponse){ res.setHeader('Access-Control-Allow-Origin', process.env.ALLOWED_ORIGIN ?? '*'); res.setHeader('Access-Control-Allow-Headers','Content-Type,x-edit-key');}
+function cors(res: VercelResponse){ res.setHeader('Access-Control-Allow-Origin', process.env.ALLOWED_ORIGIN ?? '*'); res.setHeader('Access-Control-Allow-Headers','Content-Type,x-edit-key');}
 // function toPlushieDay(rec: AirtableRecord<any>): PlushieDay { return { id: rec.id, dateKey: rec.fields.dateKey, date: rec.fields.date, count: Number(rec.fields.count ?? 0), notes: rec.fields.notes ?? null, createdAt: rec.fields.createdAt ?? rec.createdTime, updatedAt: rec.fields.updatedAt ?? rec.fields['Last Modified'] ?? undefined }; }
-
-import type { VercelRequest, VercelResponse } from '@vercel/node';
-export default function handler(req: VercelRequest, res: VercelResponse) {
-  if (req.method !== 'GET') return res.status(405).json({ error: 'method_not_allowed' });
-  res.status(200).json({ ok: true, route: '/api/plushies' });
-}
