@@ -18,7 +18,7 @@ type MetricsBlockProps = {
   }: MetricsBlockProps) {
     return (
       <div className={styles.container}>
-        <Card label="Total plushies" value={formatInt(total)} />
+        <Card label="Total Bambis" value={formatInt(total)} />
         <Card label="Days to 3000"   value={daysTo3000} sub={daysTo3000 === 1 ? "day" : "days"} />
         <Card label="Days to 3500"   value={daysTo3500} sub={daysTo3500 === 1 ? "day" : "days"} />
         <Card
