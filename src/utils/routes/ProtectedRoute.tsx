@@ -25,7 +25,7 @@ export default function ProtectedRoute({ children }: Props) {
   // If no key, go to /unlock
   useEffect(() => {
     if (!enabled) {
-      nav(`/`, { replace: true });
+      nav(`/unlock`, { replace: true });
     }
   }, [enabled, loc.pathname, nav]);
 
@@ -33,7 +33,7 @@ export default function ProtectedRoute({ children }: Props) {
   useEffect(() => {
     if (q.isError && (q.error as any)?.status === 401) {
       clearAll();
-      nav(`/unlock?to=${encodeURIComponent(loc.pathname)}`, { replace: true });
+      nav(`/unlock`, { replace: true });
     }
   }, [q.isError, q.error, clearAll, loc.pathname, nav]);
 
