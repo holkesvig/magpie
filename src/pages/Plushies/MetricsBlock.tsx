@@ -1,5 +1,6 @@
 // src/components/MetricsBlock.tsx
-import styles from "./MetricsBlock.module.scss";
+import styles from "@pages/Plushies/MetricsBlock.module.scss";
+import { MetricsCard as Card } from "@pages/Plushies/MetricsCard";
 type MetricsBlockProps = {
     total: number;          // total plushies collected so far
     daysTo3000: number;     // ceil((3000 - total)/5), >= 0
@@ -17,9 +18,9 @@ type MetricsBlockProps = {
   }: MetricsBlockProps) {
     return (
       <div className={styles.container}>
-        <Card label="Total plushies - " value={formatInt(total)} />
-        <Card label="Days to 3000 - "   value={daysTo3000} sub={daysTo3000 === 1 ? "day" : "days"} />
-        <Card label="Days to 3500 - "   value={daysTo3500} sub={daysTo3500 === 1 ? "day" : "days"} />
+        <Card label="Total plushies" value={formatInt(total)} />
+        <Card label="Days to 3000"   value={daysTo3000} sub={daysTo3000 === 1 ? "day" : "days"} />
+        <Card label="Days to 3500"   value={daysTo3500} sub={daysTo3500 === 1 ? "day" : "days"} />
         <Card
           label="Banked"
           value={formatInt(bankDrops)}
@@ -29,15 +30,15 @@ type MetricsBlockProps = {
     );
   }
   
-  function Card({ label, value, sub }: { label: string; value: number | string; sub?: string }) {
-    return (
-      <div className="rounded-2xl border bg-white p-4 shadow-sm">
-        <div className="text-xs uppercase tracking-wide text-gray-500">{label}</div>
-        <div className="mt-1 text-3xl font-semibold leading-none">{value}</div>
-        {sub ? <div className="mt-1 text-xs text-gray-500">{sub}</div> : null}
-      </div>
-    );
-  }
+  // function Card({ label, value, sub }: { label: string; value: number | string; sub?: string }) {
+  //   return (
+  //     <div className="rounded-2xl border bg-white p-4 shadow-sm">
+  //       <div className="text-xs uppercase tracking-wide text-gray-500">{label}</div>
+  //       <div className="mt-1 text-3xl font-semibold leading-none">{value}</div>
+  //       {sub ? <div className="mt-1 text-xs text-gray-500">{sub}</div> : null}
+  //     </div>
+  //   );
+  // }
   
   function formatInt(n: number) {
     return new Intl.NumberFormat().format(Math.max(0, Math.floor(n)));
