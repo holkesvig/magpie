@@ -30,16 +30,6 @@ type MetricsBlockProps = {
     );
   }
   
-  // function Card({ label, value, sub }: { label: string; value: number | string; sub?: string }) {
-  //   return (
-  //     <div className="rounded-2xl border bg-white p-4 shadow-sm">
-  //       <div className="text-xs uppercase tracking-wide text-gray-500">{label}</div>
-  //       <div className="mt-1 text-3xl font-semibold leading-none">{value}</div>
-  //       {sub ? <div className="mt-1 text-xs text-gray-500">{sub}</div> : null}
-  //     </div>
-  //   );
-  // }
-  
   function formatInt(n: number) {
     return new Intl.NumberFormat().format(Math.max(0, Math.floor(n)));
   }

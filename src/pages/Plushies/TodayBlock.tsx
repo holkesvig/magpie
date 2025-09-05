@@ -3,6 +3,7 @@ import type { Metrics } from "@pages/Plushies/Plushies.types";
 import { dateKeyOf } from "@utils/transformers/computePlushieMetrics";
 import { useAuthKeys } from "@utils/hooks/useAuthKeys";
 import { useAdjustDay, useSetDay } from "@utils/api/PlushieHooks";
+import dayjs from 'dayjs'
 
 /**
  * Props:
@@ -47,15 +48,15 @@ export default function TodayBlock({ metrics, initialNotes }: { metrics: Metrics
 
   const todayLabel = useMemo(() => {
     const [y, m, d] = todayKey.split("-");
-    return `${y}-${m}-${d}`; // already local YYYY-MM-DD
+    return dayjs(`${y}-${m}-${d}`).format('MMMM DD'); // already local YYYY-MM-DD
   }, [todayKey]);
 
   return (
-    <section className="rounded-2xl border bg-white p-4 shadow-sm space-y-4">
-      <header className="flex items-center justify-between">
-        <div>
-          <div className="text-xs uppercase tracking-wide text-gray-500">Today</div>
-          <div className="text-lg font-semibold">{todayLabel}</div>
+    <section style={{ display: 'flex', flexDirection: 'column', gap: '20px', width: '100vw', padding: '5%' }}>
+      <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '80%' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '35px', alignItems: 'center' }}>
+          <h1 className="">Today</h1>
+          <h4 style={{ color: 'grey', marginTop: -75 }}>{todayLabel}</h4>
         </div>
         <StatusPill complete={complete} />
       </header>
