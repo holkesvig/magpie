@@ -4,6 +4,7 @@ import { dateKeyOf } from "@utils/transformers/computePlushieMetrics";
 import { useAuthKeys } from "@utils/hooks/useAuthKeys";
 import { useAdjustDay, useSetDay } from "@utils/api/PlushieHooks";
 import dayjs from 'dayjs'
+import { CheckCircle } from "react-feather";
 
 /**
  * Props:
@@ -167,7 +168,7 @@ function StatusPill({ complete }: { complete: boolean }) {
         complete ? "bg-emerald-100 text-emerald-700" : "bg-gray-100 text-gray-700"
       }`}
     >
-      {complete ? "Complete" : "In progress"}
+      {complete ? <CheckCircle /> : "In progress"}
     </span>
   );
 }
