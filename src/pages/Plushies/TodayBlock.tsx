@@ -107,7 +107,7 @@ export default function TodayBlock({
           }}
         >
           <h1>Today</h1>
-          <h4 style={{ color: 'grey', marginTop: -75 }}>{todayLabel}</h4>
+          <p className={styles.date}>{todayLabel}</p>
         </div>
         <StatusPill complete={complete} completeByBank={completeByBank} />
       </header>
