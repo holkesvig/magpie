@@ -1,28 +1,29 @@
-import MetricsBlock from "@pages/Plushies/MetricsBlock";
-import TodayBlock from "@pages/Plushies/TodayBlock";
-import { usePlushieMetrics } from "@utils/api/PlushieHooks";
-import { dateKeyOf, addDays } from "@utils/transformers/computePlushieMetrics";
-import styles from "@pages/Plushies/TodayBlock.module.scss";
+import MetricsBlock from '@pages/Plushies/MetricsBlock'
+import TodayBlock from '@pages/Plushies/TodayBlock'
+import { usePlushieMetrics } from '@utils/api/PlushieHooks'
+import { dateKeyOf, addDays } from '@utils/transformers/computePlushieMetrics'
+import styles from '@pages/Plushies/Plushies.module.scss'
 
 export default function Plushies() {
   // If you want to cap the range (e.g., last 18 months), supply a start date here.
   // Otherwise omit and we’ll use the earliest record automatically.
-  const today = dateKeyOf(new Date());
-  const eighteenMonthsAgo = addDays(today, -30 * 18); // crude but OK for ranges
-  const { data: metrics, isLoading, isError, refetch } = usePlushieMetrics();
+  const today = dateKeyOf(new Date())
+  const eighteenMonthsAgo = addDays(today, -30 * 18) // crude but OK for ranges
+  const { data: metrics, isLoading, isError, refetch } = usePlushieMetrics()
 
   console.log(metrics)
 
-  if (isLoading) return <div>Loading…</div>;
-  if (isError || !metrics) return (
-    <div>
-      <div className="text-sm">Couldn’t load data.</div>
-      <button className="" onClick={() => refetch()}>Retry</button>
-    </div>
-  );
+  if (isLoading) return <div>Loading…</div>
+  if (isError || !metrics)
+    return (
+      <div>
+        <div>Couldn’t load data.</div>
+        <button onClick={() => refetch()}>Retry</button>
+      </div>
+    )
 
   return (
-    <div className="">
+    <div>
       <MetricsBlock
         total={metrics.total}
         daysTo3000={metrics.daysTo3000}
@@ -31,17 +32,18 @@ export default function Plushies() {
         bankDays={metrics.aheadDays}
       />
 
-      {/* Progress to 3000 (optional) */}
-      <div className="">
-        <div className="">
-          <span>Progress to 3000 - </span>
+      {/* Progress to 3000 */}
+      <div className={styles.overallProgress}>
+        <h3>Progress to 3000</h3>
+        <div className={styles.barContainer}>
           <span>{Math.round(metrics.pct3000 * 100)}%</span>
-          <progress className={styles.progress} value={Math.round(metrics.pct3000 * 100)} max={'100'}/>
+          <progress
+            className={styles.progress}
+            value={Math.round(metrics.pct3000 * 100)}
+            max={'100'}
+          />
         </div>
-        <div className="">
-          <div className="" style={{ width: `${Math.min(100, metrics.pct3000 * 100)}%` }} />
-        </div>
-        <div className="">
+        <div className=''>
           ETA: {metrics.eta3000} • Ahead by ({metrics.aheadDays} days)
         </div>
       </div>
@@ -50,5 +52,5 @@ export default function Plushies() {
 
       {/* Heatmap / table / controls can go here, using m.days */}
     </div>
-  );
+  )
 }

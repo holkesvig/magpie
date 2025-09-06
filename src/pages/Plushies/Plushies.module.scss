@@ -1,38 +1,39 @@
-@use '../../styles' as *;
-
-.home {
+.overallProgress {
   display: flex;
   flex-direction: column;
+  width: 100%;
   align-items: center;
+  justify-content: center;
 
-  .metrics {
-    padding: 4rem 0;
-    @media screen and (min-width: 786px) {
-      padding: 7rem 0;
-    }
-    @media screen and (min-width: 1000px) {
-      flex-direction: row;
-      align-items: flex-start;
-      box-sizing: border-box;
-      gap: 3.3%;
+  .barContainer {
+    display: flex;
+    gap: 10px;
+    width: 60%;
 
-      .tagline {
-        margin: 0;
-        font-size: 3.4rem;
+    .progress {
+      appearance: none;
+      height: 20px;
+      border-radius: 100px;
+      width: 100%;
+
+      /* Chrome and Safari */
+      &::-webkit-progress-bar {
+        background: #17224F;
+        border-radius: 100px;
       }
 
-      .subheader {
-        margin-top: 12px;
-        font-size: 1.6rem;
+      &::-webkit-progress-value {
+        background-color: #badf16;
+        border-top-left-radius: 100px;
+        border-bottom-left-radius: 100px;
+      }
+
+      /* Firefox */
+      &::-moz-progress-bar {
+        background-color: #badf16;
+        border-top-left-radius: 100px;
+        border-bottom-left-radius: 100px;
       }
     }
-  }
-
-  .secondSection {
-    background: rgba($color-primitive-sunflower, 0.3);
-  }
-
-  .thirdSection {
-    background: rgba($color-primitive-sunflower, 0.5);
   }
 }
