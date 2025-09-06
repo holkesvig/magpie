@@ -8,7 +8,9 @@ export default function Plushies() {
   // Otherwise omit and we’ll use the earliest record automatically.
   const today = dateKeyOf(new Date());
   const eighteenMonthsAgo = addDays(today, -30 * 18); // crude but OK for ranges
-  const { data: metrics, isLoading, isError, refetch } = usePlushieMetrics(eighteenMonthsAgo);
+  const { data: metrics, isLoading, isError, refetch } = usePlushieMetrics();
+
+  console.log(metrics)
 
   if (isLoading) return <div>Loading…</div>;
   if (isError || !metrics) return (
@@ -33,6 +35,7 @@ export default function Plushies() {
         <div className="">
           <span>Progress to 3000 - </span>
           <span>{Math.round(metrics.pct3000 * 100)}%</span>
+          <progress value={Math.round(metrics.pct3000 * 100)}/>
         </div>
         <div className="'">
           <div className="h-full bg-black" style={{ width: `${Math.min(100, metrics.pct3000 * 100)}%` }} />

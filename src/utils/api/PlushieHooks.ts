@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { useAuthKeys } from "@utils/hooks/useAuthKeys";
 import type { PlushiesListResponse, Metrics } from "@pages//Plushies/Plushies.types";
-import { computePlushiesMetrics, dateKeyOf, addDays, BASELINE } from "@utils/transformers/computePlushieMetrics";
+import { computePlushiesMetrics, dateKeyOf, addDays, BASELINE, START_DATE } from "@utils/transformers/computePlushieMetrics";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 // Small helper for gated GET with x-view-key
@@ -78,29 +78,25 @@ async function putWithKeys<T>(url: string, body: unknown, viewKey: string, editK
    * Fetches plushies and returns computed metrics with BASELINE applied.
    * @param startDate optional YYYY-MM-DD; omit to auto-use earliest record
    */
-  export function usePlushieMetrics(startDate?: string) {
+  export function usePlushieMetrics() {
     const { viewKey } = useAuthKeys();
   
-    // Example: cap to ~18 months (optional). Remove if you want full history.
-    const today = dateKeyOf(new Date());
-    const eighteenMonthsAgo = addDays(today, -30 * 18);
-    const from = startDate ?? eighteenMonthsAgo;
-  
     return useQuery<Metrics>({
-      queryKey: ["plushies-metrics", from, !!viewKey, BASELINE],
+      queryKey: ["plushies-metrics", START_DATE, !!viewKey, BASELINE],
       enabled: !!viewKey,
       queryFn: async () => {
+        // Optional: pass ?from=START_DATE to let the API filter server-side too (saves payload)
         const params = new URLSearchParams();
-        if (from) params.set("from", from);
+        params.set("from", START_DATE);
   
         const data = await getWithViewKey<PlushiesListResponse>(
-          `/api/plushies${params.toString() ? `?${params}` : ""}`,
+          `/api/plushies?${params.toString()}`,
           viewKey
         );
   
-        return computePlushiesMetrics(data.records, from, undefined, {
+        return computePlushiesMetrics(data.records, START_DATE, undefined, {
           baseline: BASELINE,
-          includeBaselineInAhead: true, // set true if you want baseline to affect ahead/behind
+          includeBaselineInAhead: false, // recommended: pace judged since START_DATE only
         });
       },
       staleTime: 0,

@@ -131,8 +131,9 @@ export default function TodayBlock({
         {/* Progress to goal */}
         <div className='rounded-xl border p-3'>
           <div className='flex items-center justify-between text-xs text-gray-500'>
-            <span>Progress to {goal}</span>
+            <span>Progress to {goal} - </span>
             <span>{progressPct}%</span>
+            <progress value={progressPct} />
           </div>
           <div className='mt-2 h-2 w-full rounded-full bg-gray-200 overflow-hidden'>
             <div

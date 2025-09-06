@@ -3,7 +3,8 @@ import type { PlushieRecord, Metrics, DayCell } from "pages/Plushies/Plushies.ty
 export const GOAL = 5;                 // per-day goal
 export const MAIN_TARGET = 3000;       // primary target
 export const STRETCH_TARGET = 3500;    // stretch target
-export const BASELINE = 0;             // <- set your baseline here (exported for the hook)
+export const BASELINE = 283;             
+export const START_DATE = "2025-09-01";
 
 /** YYYY-MM-DD (local) */
 export function dateKeyOf(d: Date) {
