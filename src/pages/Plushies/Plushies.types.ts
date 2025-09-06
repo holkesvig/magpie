@@ -15,6 +15,7 @@ export type PlushieRecord = {
     effective: number;   // raw + bank used to cover shortfall
     complete: boolean;   // met the daily goal (via raw and/or bank)
     bankAfter: number;   // bank after this day
+    updatedAt?: string;   // last updated time (Airtable)
   };
   
   export type Metrics = {
