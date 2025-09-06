@@ -10,6 +10,7 @@ export default function Plushies() {
   const today = dateKeyOf(new Date())
   const eighteenMonthsAgo = addDays(today, -30 * 18) // crude but OK for ranges
   const { data: metrics, isLoading, isError, refetch } = usePlushieMetrics()
+  const aheadByMoreThan1Day = (metrics?.aheadDays ?? 0) > 1
   
   if (isLoading) return <div>Loading…</div>
   if (isError || !metrics)
@@ -21,7 +22,7 @@ export default function Plushies() {
     )
 
   return (
-    <div>
+    <div className={styles.plushies}>
       <MetricsBlock
         total={metrics.total}
         daysTo3000={metrics.daysTo3000}
@@ -41,8 +42,8 @@ export default function Plushies() {
             max={'100'}
           />
         </div>
-        <div className=''>
-          ETA: {metrics.eta3000} • Ahead by ({metrics.aheadDays} days)
+        <div>
+          ETA: {metrics.eta3000} • Ahead by {metrics.aheadDays} {aheadByMoreThan1Day ? 'days' : 'day'}
         </div>
       </div>
 

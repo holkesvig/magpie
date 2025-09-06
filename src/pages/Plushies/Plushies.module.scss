@@ -1,38 +1,50 @@
-.overallProgress {
+.plushies {
   display: flex;
   flex-direction: column;
-  width: 100%;
   align-items: center;
-  justify-content: center;
+  gap: 20px;
 
-  .barContainer {
+  .overallProgress {
     display: flex;
-    gap: 10px;
-    width: 60%;
+    flex-direction: column;
+    width: 87vw;
+    max-width: 900px;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #accae0;
+    border-radius: 6px;
+    padding: 15px;
+    box-sizing: border-box;
 
-    .progress {
-      appearance: none;
-      height: 20px;
-      border-radius: 100px;
-      width: 100%;
+    .barContainer {
+      display: flex;
+      gap: 10px;
+      width: 60%;
 
-      /* Chrome and Safari */
-      &::-webkit-progress-bar {
-        background: #17224F;
+      .progress {
+        appearance: none;
+        height: 20px;
         border-radius: 100px;
-      }
+        width: 100%;
 
-      &::-webkit-progress-value {
-        background-color: #FFA630;
-        border-top-left-radius: 100px;
-        border-bottom-left-radius: 100px;
-      }
+        /* Chrome and Safari */
+        &::-webkit-progress-bar {
+          background: #17224f;
+          border-radius: 100px;
+        }
 
-      /* Firefox */
-      &::-moz-progress-bar {
-        background-color: #FFA630;
-        border-top-left-radius: 100px;
-        border-bottom-left-radius: 100px;
+        &::-webkit-progress-value {
+          background-color: #ffa630;
+          border-top-left-radius: 100px;
+          border-bottom-left-radius: 100px;
+        }
+
+        /* Firefox */
+        &::-moz-progress-bar {
+          background-color: #ffa630;
+          border-top-left-radius: 100px;
+          border-bottom-left-radius: 100px;
+        }
       }
     }
   }
