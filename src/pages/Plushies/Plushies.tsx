@@ -11,7 +11,7 @@ export default function Plushies() {
   const eighteenMonthsAgo = addDays(today, -30 * 18) // crude but OK for ranges
   const { data: metrics, isLoading, isError, refetch } = usePlushieMetrics()
   const aheadByMoreThan1Day = (metrics?.aheadDays ?? 0) > 1
-  
+
   if (isLoading) return <div>Loading…</div>
   if (isError || !metrics)
     return (
@@ -23,13 +23,16 @@ export default function Plushies() {
 
   return (
     <div className={styles.plushies}>
-      <MetricsBlock
-        total={metrics.total}
-        daysTo3000={metrics.daysTo3000}
-        daysTo3500={metrics.daysTo3500}
-        bankDrops={metrics.bank}
-        bankDays={metrics.aheadDays}
-      />
+      <div className={styles.metrics}>
+        {/* Metrics Cards*/}
+        <MetricsBlock
+          total={metrics.total}
+          daysTo3000={metrics.daysTo3000}
+          daysTo3500={metrics.daysTo3500}
+          bankDrops={metrics.bank}
+          bankDays={metrics.aheadDays}
+        />
+      </div>
 
       {/* Progress to 3000 */}
       <div className={styles.overallProgress}>
@@ -43,11 +46,15 @@ export default function Plushies() {
           />
         </div>
         <div>
-          ETA: {metrics.eta3000} • Ahead by {metrics.aheadDays} {aheadByMoreThan1Day ? 'days' : 'day'}
+          ETA: {metrics.eta3000} • Ahead by {metrics.aheadDays}{' '}
+          {aheadByMoreThan1Day ? 'days' : 'day'}
         </div>
       </div>
 
-      <TodayBlock metrics={metrics} />
+      {/* Today */}
+      <div className={styles.today}>
+        <TodayBlock metrics={metrics} />
+      </div>
 
       {/* Heatmap / table / controls can go here, using m.days */}
     </div>
