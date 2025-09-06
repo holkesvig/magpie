@@ -33,7 +33,6 @@ export default function TodayBlock({
   const goal = metrics.goalPerDay ?? 5
   const lastUpdated = todayCell?.updatedAt
 
-
   // Select latest timestamp
   const displayUpdatedAt = useMemo(() => {
     // 1) Prefer today's updatedAt
@@ -81,74 +80,68 @@ export default function TodayBlock({
   }, [todayKey])
 
   return (
-    <div className={styles.todayCard}>
-      <header
-        style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          width: '80%',
-        }}
-      >
-        <div
+    <div>
+      <div className={styles.todayCard}>
+        <header
           style={{
             display: 'flex',
-            flexDirection: 'column',
-            gap: '35px',
+            justifyContent: 'space-between',
             alignItems: 'center',
+            width: '80%',
           }}
         >
-          <h1>Today</h1>
-          <p className={styles.date}>{todayLabel}</p>
-        </div>
-        <StatusPill complete={complete} completeByBank={completeByBank} />
-      </header>
-
-      {displayUpdatedAt && (
-        <div>
-          Last bambi added on{' '}
-          {dayjs(displayUpdatedAt).format('MM/DD - hh:mm A')}
-        </div>
-      )}
-
-      <div>
-        {/* Collected today */}
-        <div>
-          <div>Collected today</div>
-          <div>{formatInt(todayRaw)}</div>
-          {coveredByBank > 0 && <div>+{coveredByBank} from bank</div>}
-        </div>
-
-        {/* Progress to goal */}
-        <div>
-          <div>
-            <span>Progress to {goal} - </span>
-            <span>{progressPct}%</span>
-            <progress
-              className={styles.progress}
-              value={progressPct}
-              max={'100'}
-            />
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '35px',
+              alignItems: 'center',
+            }}
+          >
+            <h1>Today</h1>
+            <p className={styles.date}>{todayLabel}</p>
           </div>
-          <div>
-            {todayRaw} / {goal}
-          </div>
-        </div>
+          <StatusPill complete={complete} completeByBank={completeByBank} />
+        </header>
 
-        {/* Bank snapshot */}
         <div>
-          <div>Bank (before today)</div>
-          <div>{formatInt(bankBefore)}</div>
+          {/* Collected today */}
           <div>
-            = {Math.floor(bankBefore / goal)}
-            {Math.floor(bankBefore / goal) === 1 ? 'day' : 'days'}
+            <div>Collected today</div>
+            <div>{formatInt(todayRaw)}</div>
+            {coveredByBank > 0 && <div>+{coveredByBank} from bank</div>}
+          </div>
+
+          {/* Progress to goal */}
+          <div>
+            <div>
+              <span>Progress to {goal} - </span>
+              <span>{progressPct}%</span>
+              <progress
+                className={styles.progress}
+                value={progressPct}
+                max={'100'}
+              />
+            </div>
+            <div>
+              {todayRaw} / {goal}
+            </div>
+          </div>
+
+          {/* Bank snapshot */}
+          <div>
+            <div>Bank (before today)</div>
+            <div>{formatInt(bankBefore)}</div>
+            <div>
+              = {Math.floor(bankBefore / goal)}
+              {Math.floor(bankBefore / goal) === 1 ? 'day' : 'days'}
+            </div>
           </div>
         </div>
       </div>
-
       {/* Controls (edit mode only) */}
       {editable ? (
-        <div>
+        <div className={styles.controls}>
           {/* Increment / Decrement */}
           <div>
             <button
@@ -190,6 +183,13 @@ export default function TodayBlock({
             </button>
           </div>
 
+          {displayUpdatedAt && (
+            <div>
+              Last bambi added on{' '}
+              {dayjs(displayUpdatedAt).format('MM/DD - hh:mm A')}
+            </div>
+          )}
+
           {/* Notes (optional) */}
           <div>
             <label>Notes</label>
@@ -210,7 +210,7 @@ export default function TodayBlock({
 
 function StatusPill({
   complete,
-  completeByBank
+  completeByBank,
 }: {
   complete: boolean
   completeByBank?: boolean
