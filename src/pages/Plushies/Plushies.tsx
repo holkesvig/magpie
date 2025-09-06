@@ -2,6 +2,7 @@ import MetricsBlock from "@pages/Plushies/MetricsBlock";
 import TodayBlock from "@pages/Plushies/TodayBlock";
 import { usePlushieMetrics } from "@utils/api/PlushieHooks";
 import { dateKeyOf, addDays } from "@utils/transformers/computePlushieMetrics";
+import styles from "@pages/Plushies/TodayBlock.module.scss";
 
 export default function Plushies() {
   // If you want to cap the range (e.g., last 18 months), supply a start date here.
@@ -35,10 +36,10 @@ export default function Plushies() {
         <div className="">
           <span>Progress to 3000 - </span>
           <span>{Math.round(metrics.pct3000 * 100)}%</span>
-          <progress value={Math.round(metrics.pct3000 * 100)}/>
+          <progress className={styles.progress} value={Math.round(metrics.pct3000 * 100)} max={'100'}/>
         </div>
-        <div className="'">
-          <div className="h-full bg-black" style={{ width: `${Math.min(100, metrics.pct3000 * 100)}%` }} />
+        <div className="">
+          <div className="" style={{ width: `${Math.min(100, metrics.pct3000 * 100)}%` }} />
         </div>
         <div className="">
           ETA: {metrics.eta3000} • Ahead by ({metrics.aheadDays} days)

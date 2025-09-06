@@ -104,54 +104,49 @@ export default function TodayBlock({
             alignItems: 'center',
           }}
         >
-          <h1 className=''>Today</h1>
+          <h1>Today</h1>
           <h4 style={{ color: 'grey', marginTop: -75 }}>{todayLabel}</h4>
         </div>
         <StatusPill complete={complete} />
       </header>
 
       {displayUpdatedAt && (
-        <div className='mt-1 text-xs text-gray-500'>
-          Last bambi added on {dayjs(displayUpdatedAt).format('MM/DD - hh:mm A')}
+        <div>
+          Last bambi added on{' '}
+          {dayjs(displayUpdatedAt).format('MM/DD - hh:mm A')}
         </div>
       )}
 
-      <div className='grid gap-3 md:grid-cols-3'>
+      <div>
         {/* Collected today */}
-        <div className='rounded-xl border p-3'>
-          <div className='text-xs text-gray-500'>Collected today</div>
-          <div className='text-3xl font-semibold'>{formatInt(todayRaw)}</div>
-          {coveredByBank > 0 && (
-            <div className='mt-1 text-xs text-gray-500'>
-              +{coveredByBank} from bank
-            </div>
-          )}
+        <div>
+          <div>Collected today</div>
+          <div>{formatInt(todayRaw)}</div>
+          {coveredByBank > 0 && <div>+{coveredByBank} from bank</div>}
         </div>
 
         {/* Progress to goal */}
-        <div className='rounded-xl border p-3'>
-          <div className='flex items-center justify-between text-xs text-gray-500'>
+        <div>
+          <div>
             <span>Progress to {goal} - </span>
             <span>{progressPct}%</span>
-            <progress value={progressPct} />
-          </div>
-          <div className='mt-2 h-2 w-full rounded-full bg-gray-200 overflow-hidden'>
-            <div
-              className='h-full bg-black'
-              style={{ width: `${progressPct}%` }}
+            <progress
+              className={styles.progress}
+              value={progressPct}
+              max={'100'}
             />
           </div>
-          <div className='mt-1 text-xs text-gray-600'>
+          <div>
             {todayRaw} / {goal}
           </div>
         </div>
 
         {/* Bank snapshot */}
-        <div className='rounded-xl border p-3'>
-          <div className='text-xs text-gray-500'>Bank (before today)</div>
-          <div className='text-3xl font-semibold'>{formatInt(bankBefore)}</div>
-          <div className='mt-1 text-xs text-gray-500'>
-            = {Math.floor(bankBefore / goal)}{' '}
+        <div>
+          <div>Bank (before today)</div>
+          <div>{formatInt(bankBefore)}</div>
+          <div>
+            = {Math.floor(bankBefore / goal)}
             {Math.floor(bankBefore / goal) === 1 ? 'day' : 'days'}
           </div>
         </div>
@@ -159,13 +154,12 @@ export default function TodayBlock({
 
       {/* Controls (edit mode only) */}
       {editable ? (
-        <div className='grid gap-3 md:grid-cols-3'>
+        <div>
           {/* Increment / Decrement */}
-          <div className='flex items-center gap-2'>
+          <div>
             <button
               onClick={handleDecrement}
               disabled={disableActions}
-              className='rounded-xl border px-4 py-2 disabled:opacity-50'
               aria-label='Decrement'
             >
               −1
@@ -173,19 +167,16 @@ export default function TodayBlock({
             <button
               onClick={handleIncrement}
               disabled={disableActions}
-              className='rounded-xl border px-4 py-2 disabled:opacity-50'
               aria-label='Increment'
             >
               +1
             </button>
-            {(adjust.isPending || setDay.isPending) && (
-              <span className='text-xs text-gray-500 ml-2'>Saving…</span>
-            )}
+            {(adjust.isPending || setDay.isPending) && <span>Saving…</span>}
           </div>
 
           {/* Set absolute */}
-          <div className='flex items-center gap-2'>
-            <label className='text-sm text-gray-600'>Set to</label>
+          <div>
+            <label>Set to</label>
             <input
               type='number'
               min={0}
@@ -196,33 +187,28 @@ export default function TodayBlock({
                   e.target.value === '' ? '' : Number(e.target.value)
                 )
               }
-              className='w-24 rounded-xl border px-3 py-2'
             />
             <button
               onClick={handleSaveManual}
               disabled={disableActions || typeof manualCount !== 'number'}
-              className='rounded-xl border px-4 py-2 disabled:opacity-50 bg-black text-white'
             >
               Save
             </button>
           </div>
 
           {/* Notes (optional) */}
-          <div className='flex items-center gap-2'>
-            <label className='text-sm text-gray-600'>Notes</label>
+          <div>
+            <label>Notes</label>
             <input
               type='text'
               placeholder='Optional'
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
-              className='flex-1 rounded-xl border px-3 py-2'
             />
           </div>
         </div>
       ) : (
-        <div className='text-xs text-gray-500'>
-          View-only. Unlock editing to change today’s count.
-        </div>
+        <div>View-only. Unlock editing to change today’s count.</div>
       )}
     </section>
   )
