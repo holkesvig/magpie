@@ -112,7 +112,7 @@ export default function TodayBlock({
 
       {displayUpdatedAt && (
         <div className='mt-1 text-xs text-gray-500'>
-          Last bambi added on {dayjs(displayUpdatedAt).format('MM/DD - hh:mm')}
+          Last bambi added on {dayjs(displayUpdatedAt).format('MM/DD - hh:mm A')}
         </div>
       )}
 
