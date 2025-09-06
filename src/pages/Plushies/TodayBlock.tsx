@@ -33,6 +33,7 @@ export default function TodayBlock({
   const goal = metrics.goalPerDay ?? 5
   const lastUpdated = todayCell?.updatedAt
 
+
   // Select latest timestamp
   const displayUpdatedAt = useMemo(() => {
     // 1) Prefer today's updatedAt
@@ -50,7 +51,8 @@ export default function TodayBlock({
   const remainingToGoal = Math.max(0, goal - todayRaw)
   const coveredByBank = Math.min(remainingToGoal, bankBefore)
   const progressPct = Math.min(100, Math.round((todayRaw / goal) * 100))
-  const complete = todayCell?.complete ?? false
+  const complete = (todayCell?.complete && todayCell?.raw === 5) ?? false
+  const completeByBank = todayCell?.complete ?? false
 
   // Local "Set to" field & notes
   const [manualCount, setManualCount] = useState<number | ''>('')
@@ -107,7 +109,7 @@ export default function TodayBlock({
           <h1>Today</h1>
           <h4 style={{ color: 'grey', marginTop: -75 }}>{todayLabel}</h4>
         </div>
-        <StatusPill complete={complete} />
+        <StatusPill complete={complete} completeByBank={completeByBank} />
       </header>
 
       {displayUpdatedAt && (
@@ -214,9 +216,18 @@ export default function TodayBlock({
   )
 }
 
-function StatusPill({ complete }: { complete: boolean }) {
+function StatusPill({
+  complete,
+  completeByBank
+}: {
+  complete: boolean
+  completeByBank?: boolean
+}) {
   return (
-    <span className={''}>{complete ? <CheckCircle /> : 'In progress'}</span>
+    <div>
+      {complete ? <CheckCircle className={styles.complete} /> : 'In progress'}
+      {completeByBank ? <p>covered by bank</p> : null}
+    </div>
   )
 }
 

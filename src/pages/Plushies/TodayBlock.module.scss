@@ -2,6 +2,7 @@
   appearance: none;
   height: 20px;
   border-radius: 100px;
+  margin: 0 10px;
 
   /* Chrome and Safari */
   &::-webkit-progress-bar {
@@ -21,4 +22,8 @@
     border-top-left-radius: 100px;
     border-bottom-left-radius: 100px;
   }
+}
+
+.complete {
+    color: #badf16;
 }

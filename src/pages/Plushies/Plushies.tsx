@@ -10,9 +10,7 @@ export default function Plushies() {
   const today = dateKeyOf(new Date())
   const eighteenMonthsAgo = addDays(today, -30 * 18) // crude but OK for ranges
   const { data: metrics, isLoading, isError, refetch } = usePlushieMetrics()
-
-  console.log(metrics)
-
+  
   if (isLoading) return <div>Loading…</div>
   if (isError || !metrics)
     return (
