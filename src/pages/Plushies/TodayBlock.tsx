@@ -81,15 +81,7 @@ export default function TodayBlock({
   }, [todayKey])
 
   return (
-    <section
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '20px',
-        width: '100vw',
-        padding: '5%',
-      }}
-    >
+    <div className={styles.todayCard}>
       <header
         style={{
           display: 'flex',
@@ -212,7 +204,7 @@ export default function TodayBlock({
       ) : (
         <div>View-only. Unlock editing to change today’s count.</div>
       )}
-    </section>
+    </div>
   )
 }
 

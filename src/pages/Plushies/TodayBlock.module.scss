@@ -6,31 +6,50 @@
 
   /* Chrome and Safari */
   &::-webkit-progress-bar {
-    background: #17224F;
+    background: #17224f;
     border-radius: 100px;
   }
 
   &::-webkit-progress-value {
-    background-color: #FFA630;
+    background-color: #ffa630;
     border-top-left-radius: 100px;
     border-bottom-left-radius: 100px;
   }
 
   /* Firefox */
   &::-moz-progress-bar {
-    background-color: #FFA630;
+    background-color: #ffa630;
     border-top-left-radius: 100px;
     border-bottom-left-radius: 100px;
   }
 }
 
 .complete {
-    color: #badf16;
+  color: #badf16;
 }
 
 .date {
-    color: #ACCAE0;
-    margin-top: -79px;
-    margin-left: -27px;
-    font-size: 0.9em;
+  color: #accae0;
+  margin-top: -79px;
+  margin-left: -27px;
+  font-size: 0.9em;
+}
+
+.todayCard {
+  width: 87vw;
+  max-width: 900px;
+  padding: 10px 30px;
+  border-radius: 6px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  box-sizing: border-box;
+  background: linear-gradient(
+    30deg,
+    rgba(0, 11, 59, 1) 0%,
+    rgba(29, 26, 77, 1) 24%,
+    rgba(86, 54, 113, 1) 61%,
+    rgba(115, 73, 102, 1) 74%,
+    rgba(173, 112, 79, 1) 100%,
+    rgba(228, 148, 58, 1) 100%,
+    rgba(255, 166, 48, 1) 100%
+  );
 }
