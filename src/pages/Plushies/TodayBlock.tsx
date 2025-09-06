@@ -5,7 +5,6 @@ import { useAuthKeys } from '@utils/hooks/useAuthKeys'
 import { useAdjustDay, useSetDay } from '@utils/api/PlushieHooks'
 import dayjs from 'dayjs'
 import { CheckCircle } from 'react-feather'
-import cx from 'classnames'
 import styles from '@pages/Plushies/TodayBlock.module.scss'
 
 /**
@@ -31,7 +30,9 @@ export default function TodayBlock({
   const todayRaw = todayCell?.raw ?? 0
   const bankBefore = prevCell?.bankAfter ?? 0
   const goal = metrics.goalPerDay ?? 5
-  const lastUpdated = todayCell?.updatedAt
+  const todayNotes = todayCell?.notes ?? ''
+
+  console.log(todayCell)
 
   // Select latest timestamp
   const displayUpdatedAt = useMemo(() => {
@@ -82,36 +83,29 @@ export default function TodayBlock({
   return (
     <div>
       <div className={styles.todayCard}>
-        <header
-          style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            width: '80%',
-          }}
-        >
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              gap: '35px',
-              alignItems: 'center',
-            }}
-          >
-            <h1>Today</h1>
-            <p className={styles.date}>{todayLabel}</p>
+        {/* Header and bytes */}
+          <div className={styles.todayHeader}>
+            <div className={styles.dateContainer}>
+              <h1>Today</h1>
+              <p className={styles.date}>{todayLabel}</p>
+            </div>
+            <StatusPill
+              complete={complete}
+              completeByBank={completeByBank}
+              bankUsage={coveredByBank}
+            />
           </div>
-          <StatusPill complete={complete} completeByBank={completeByBank} />
-        </header>
+
+        {todayNotes ? <p>{todayNotes}</p> : null}
 
         {/* Progress to goal */}
-          <div className={styles.progressContainer}>
-            <div>{progressPct}%</div>
-            <progress
-              className={styles.progress}
-              value={progressPct}
-              max={'100'}
-            />
+        <div className={styles.progressContainer}>
+          <div>{progressPct}%</div>
+          <progress
+            className={styles.progress}
+            value={progressPct}
+            max={'100'}
+          />
 
           <div>
             {todayRaw} / {goal}
@@ -119,7 +113,6 @@ export default function TodayBlock({
         </div>
 
         <div>
-
           {/* Collected today */}
           {/* <div>
             <div>Collected today</div>
@@ -128,12 +121,11 @@ export default function TodayBlock({
           </div> */}
 
           {/* Bank snapshot */}
-          <div>
-            <div>Bank (before today)</div>
-            <div>{formatInt(bankBefore)}</div>
+          <div className={styles.bank}>
+            <div>Bank (before today): {formatInt(bankBefore)}</div>
             <div>
-              = {Math.floor(bankBefore / goal)}
-              {Math.floor(bankBefore / goal) === 1 ? 'day' : 'days'}
+              {Math.floor(bankBefore / goal)}
+              {Math.floor(bankBefore / goal) === 1 ? ' day' : ' days'}
             </div>
           </div>
         </div>
@@ -210,14 +202,18 @@ export default function TodayBlock({
 function StatusPill({
   complete,
   completeByBank,
+  bankUsage,
 }: {
   complete: boolean
   completeByBank?: boolean
+  bankUsage?: number
 }) {
   return (
-    <div>
+    <div className={styles.dailyStatus}>
       {complete ? <CheckCircle className={styles.complete} /> : 'In progress'}
-      {completeByBank ? <p>covered by bank</p> : null}
+      {completeByBank && bankUsage ? (
+        <p>Bank usage: {formatInt(bankUsage)}</p>
+      ) : null}
     </div>
   )
 }

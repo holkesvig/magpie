@@ -2,38 +2,60 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 5px;
+  margin-top: -10px;
 
   .progress {
-  appearance: none;
-  height: 20px;
-  border-radius: 100px;
-  margin: 0 10px;
-  flex-grow: 1;
-
-  /* Chrome and Safari */
-  &::-webkit-progress-bar {
-    background: #17224f;
+    appearance: none;
+    height: 20px;
     border-radius: 100px;
-  }
+    margin: 0 10px;
+    flex-grow: 1;
 
-  &::-webkit-progress-value {
-    background-color: #ffa630;
-    border-top-left-radius: 100px;
-    border-bottom-left-radius: 100px;
-  }
+    /* Chrome and Safari */
+    &::-webkit-progress-bar {
+      background: #17224f;
+      border-radius: 100px;
+    }
 
-  /* Firefox */
-  &::-moz-progress-bar {
-    background-color: #ffa630;
-    border-top-left-radius: 100px;
-    border-bottom-left-radius: 100px;
+    &::-webkit-progress-value {
+      background-color: #ffcb30;
+      border-top-left-radius: 100px;
+      border-bottom-left-radius: 100px;
+    }
+
+    /* Firefox */
+    &::-moz-progress-bar {
+      background-color: #ffcb30;
+      border-top-left-radius: 100px;
+      border-bottom-left-radius: 100px;
+    }
   }
-}
 }
 
 .complete {
   color: #badf16;
+}
+
+.dateContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 35px;
+  align-items: center;
+  margin-top: -25px;
+}
+
+.todayHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: -25px;
+}
+
+.dailyStatus {
+  display: flex;
+  flex-direction: column;
+  margin-top: 15px;
+  align-items: flex-end;
 }
 
 .date {
@@ -43,13 +65,21 @@
   font-size: 0.9em;
 }
 
+.bank {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
 .todayCard {
   width: 87vw;
   max-width: 900px;
-  padding: 10px 30px;
+  padding: 10px 30px 30px 30px;
   border-radius: 6px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
   background: linear-gradient(
     30deg,
     rgba(0, 11, 59, 1) 0%,
