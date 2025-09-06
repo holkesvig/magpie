@@ -104,29 +104,28 @@ export default function TodayBlock({
           <StatusPill complete={complete} completeByBank={completeByBank} />
         </header>
 
-        <div>
-          {/* Collected today */}
+        {/* Progress to goal */}
+          <div className={styles.progressContainer}>
+            <div>{progressPct}%</div>
+            <progress
+              className={styles.progress}
+              value={progressPct}
+              max={'100'}
+            />
+
           <div>
+            {todayRaw} / {goal}
+          </div>
+        </div>
+
+        <div>
+
+          {/* Collected today */}
+          {/* <div>
             <div>Collected today</div>
             <div>{formatInt(todayRaw)}</div>
             {coveredByBank > 0 && <div>+{coveredByBank} from bank</div>}
-          </div>
-
-          {/* Progress to goal */}
-          <div>
-            <div>
-              <span>Progress to {goal} - </span>
-              <span>{progressPct}%</span>
-              <progress
-                className={styles.progress}
-                value={progressPct}
-                max={'100'}
-              />
-            </div>
-            <div>
-              {todayRaw} / {goal}
-            </div>
-          </div>
+          </div> */}
 
           {/* Bank snapshot */}
           <div>

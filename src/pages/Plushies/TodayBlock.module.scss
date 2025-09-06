@@ -1,8 +1,15 @@
-.progress {
+.progressContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 5px;
+
+  .progress {
   appearance: none;
   height: 20px;
   border-radius: 100px;
   margin: 0 10px;
+  flex-grow: 1;
 
   /* Chrome and Safari */
   &::-webkit-progress-bar {
@@ -22,6 +29,7 @@
     border-top-left-radius: 100px;
     border-bottom-left-radius: 100px;
   }
+}
 }
 
 .complete {
